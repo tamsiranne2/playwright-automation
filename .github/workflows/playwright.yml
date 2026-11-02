@@ -9,9 +9,12 @@ on:
 jobs:
   test:
     timeout-minutes: 60
-    runs-on: ubuntu-latest # Das ist das korrekte Attribut
+    # Feste Ubuntu-Version statt ubuntu-latest, um Versionssprünge zu verhindern
+    runs-on: ubuntu-22.04 
+    
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
       
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -28,7 +31,6 @@ jobs:
       - name: Run Playwright E2E tests
         run: npx playwright test
         env:
-          # Falls du Auth-States oder Secrets übergeben musst
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
 
