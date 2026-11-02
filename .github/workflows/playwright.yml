@@ -9,8 +9,7 @@ on:
 jobs:
   test:
     timeout-minutes: 60
-    # Feste Ubuntu-Version statt ubuntu-latest, um Versionssprünge zu verhindern
-    runs-on: ubuntu-22.04 
+    runs-on: ubuntu-22.04
     
     steps:
       - name: Checkout code
