@@ -9,8 +9,7 @@ on:
 jobs:
   test:
     timeout-minutes: 60
-    runs-order: ubuntu-latest
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Das ist das korrekte Attribut
     steps:
       - uses: actions/checkout@v4
       
