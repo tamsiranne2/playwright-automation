@@ -1,0 +1,1 @@
+[{"uid":"f703dbb35925ff52","name":"Erfolgreicher Login mit Fixture","time":{"start":1793365927802,"stop":1793365958085,"duration":30283},"status":"broken","severity":"normal"},{"uid":"4ced4370abcde871","name":"authentifizieren und State speichern","time":{"start":1793365923672,"stop":1793365926413,"duration":2741},"status":"passed","severity":"normal"}]

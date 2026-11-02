@@ -1,0 +1,3 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","30283","Erfolgreicher Login mit Fixture","chromium","2026-10-30","broken","2026-10-30","","login.spec.ts","",""
+"","2741","authentifizieren und State speichern","setup","2026-10-30","passed","2026-10-30","","auth.setup.ts","",""
