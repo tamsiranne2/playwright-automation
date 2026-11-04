@@ -9,10 +9,13 @@ export class LoginPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.connectLink=page.getByRole('link', { name: 'Se connecter' });
+    //this.connectLink = page.getByRole('link', { name: /anmelden|login|Se connecter/i });
+    //this.connectLink = page.locator('a[href="/auth"]');
+    this.connectLink = page.getByRole('link', { name: /se connecter/i });
     this.emailInput = page.getByLabel('Email');
     this.passwordInput = page.getByLabel('Mot de passe');
-    this.submitButton = page.getByRole('button', { name: 'Se connecter' });
+//this.connectLink = page.getByRole('link', { name: /anmelden|login|se connecter/i });
+    this.submitButton = page.getByRole('button', { name: /anmelden|login|Se connecter|einloggen/i });
   }
 
   async goto() {

@@ -1,9 +1,10 @@
 import { test, expect } from '@playwright/test';
 
 test('Sollte eine Fehlermeldung anzeigen, wenn das Laden der Inserate fehlschlägt (HTTP 500)', async ({ page }) => {
-  // 1. Netzwerk-Anfrage für Listings abfangen, BEVOR die Seite geladen wird
-  //await page.route('**/rest/v1/listings**', async (route) => {
-  await page.route('**/rest/v1/browse**', async (route) => {
+  
+  // 1. Abfangen aller Anfragen, die "browse" oder "listings" im Pfad enthalten
+  await page.route('**/*{browse,listings}*', async (route) => {
+    console.log('Intercepted API call:', route.request().url());
     await route.fulfill({
       status: 500,
       contentType: 'application/json',
@@ -11,10 +12,10 @@ test('Sollte eine Fehlermeldung anzeigen, wenn das Laden der Inserate fehlschlä
     });
   });
 
-  // 2. Zur Zielseite navigieren (z. B. Startseite oder Dashboard, wo Inserate geladen werden)
+  // 2. Auf die Seite navigieren
   await page.goto('/browse');
 
-  // 3. Überprüfen, ob das Frontend stabil bleibt und einen Fehlerhinweis anzeigt
-  // (Hinweis: Passe den Suchtext / Selektor an den tatsächlichen Text an, den deine App anzeigt)
-  await expect(page.getByText(/fehler|error|laden fehlgeschlagen/i)).toBeVisible();
+  // 3. Auf Fehlermeldung ODER leeren Zustand prüfen
+  // Prüfe, welcher Text tatsächlich in der UI gerendert wird
+  await expect(page.getByText(/erreur|error|fehler|impossible de charger/i)).toBeVisible();
 });

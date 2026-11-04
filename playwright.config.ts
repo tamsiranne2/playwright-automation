@@ -48,6 +48,7 @@ export default defineConfig({
   // Konfiguration für verschiedene Browser
   projects: [
     // 1. Setup-Projekt für Authentifizierung (Speichert den Login-State)
+    
     {
       name: 'setup',
       testMatch: /.*\.setup\.ts/,
@@ -61,7 +62,7 @@ export default defineConfig({
         // Bindet den generierten Login-State ein, damit man nicht jedes Mal neu loggen muss
         storageState: 'playwright/.auth/user.json',
       },
-      dependencies: ['setup'], // Führt erst das Setup aus, dann die Tests
+    //  dependencies: ['setup'], // Führt erst das Setup aus, dann die Tests
     },
 
     // Optional: Weitere Browser wie Firefox oder Safari (WebKit)

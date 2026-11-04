@@ -1,4 +1,6 @@
-/** ohne POM import { test, expect } from '@playwright/test';
+//1. 
+/** ohne POM ganz einfach alles im Test was nicht empfehlenswert ist
+ * import { test, expect } from '@playwright/test';
 
 test.describe('Authentication Flow', () => {
   test('should allow user to log in with valid credentials', async ({ page }) => {
@@ -17,26 +19,30 @@ test.describe('Authentication Flow', () => {
   });
 });
 **/
-// Nun with POM
-//jetzt mit POM und Fixture file
-//import { test, expect } from '@playwright/test';
+
+//2.
+// Nun mit dem POM aber noch ohne den Fixtures files.. fails fixture genutzt wird muss das folgende Block auskommentiert with POM
+/** 
+import { test, expect } from '@playwright/test';
 // In deinen Testdateien:
 
 import { LoginPage } from '../pages/LoginPage';
 
 
 
-/**ohne fixtures 
+
 test('Login Test', async ({ page }) => {
-  // auskommentiert weil jetzt fixture genutztwird
-  // const loginPage = new LoginPage(page);
+  
+   const loginPage = new LoginPage(page);
   
   await loginPage.goto();
   await loginPage.login('tamsir.anne@hotmail.de', 'Epm27?!.');
 
   await expect(page.getByRole('heading', { name: 'Tableau de bord' })).toBeVisible();
 });
-*/
+**/
+
+//3. 
 //mit fixtures
 import { test, expect } from '../fixtures/fixtLoginPage'; // Lädt deine eigene Version inklusive Fixtures!
 test('Erfolgreicher Login mit Fixture', async ({ loginPage, page }) => {
