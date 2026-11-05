@@ -10,8 +10,8 @@ export class LoginPage {
   constructor(page: Page) {
     this.page = page;
     //this.connectLink = page.getByRole('link', { name: /anmelden|login|Se connecter/i });
-    //this.connectLink = page.locator('a[href="/auth"]');
-    this.connectLink = page.getByRole('link', { name: /se connecter/i });
+    this.connectLink = page.locator('a[href="/auth"]');
+    //this.connectLink = page.getByRole('link', { name: /se connecter/i });
     this.emailInput = page.getByLabel('Email');
     this.passwordInput = page.getByLabel('Mot de passe');
 //this.connectLink = page.getByRole('link', { name: /anmelden|login|se connecter/i });
