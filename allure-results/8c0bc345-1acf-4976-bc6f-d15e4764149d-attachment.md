@@ -1,0 +1,92 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: login.spec.ts >> Erfolgreiche Registrierung mit Fixture
+- Location: tests/login.spec.ts:56:5
+
+# Error details
+
+```
+Error: locator.fill: Target page, context or browser has been closed
+Call log:
+  - waiting for locator('#signup-name')
+
+```
+
+# Test source
+
+```ts
+  1  | import { Locator, Page } from '@playwright/test';
+  2  | 
+  3  | export class AuthPage {
+  4  |     readonly page: Page;
+  5  |     //readonly connectLink: Locator;
+  6  |     readonly emailInput: Locator;
+  7  |     readonly passwordInput: Locator;
+  8  |     readonly signInTab: Locator;
+  9  |     readonly signUpTab: Locator;
+  10 |     readonly signInButton: Locator;
+  11 |     readonly signUpEmailInput: Locator;
+  12 |     readonly signUpPasswordInput: Locator;
+  13 |     readonly signUpButton: Locator;
+  14 |     readonly createAccountButton: Locator;
+  15 |     readonly signUpNameInput: Locator;
+  16 |     readonly signUpPhoneInput: Locator;
+  17 | 
+  18 |     constructor(page: Page) {
+  19 |         this.page = page;
+  20 |         //this.connectLink = page.locator('a[href="/auth"]');
+  21 |         this.emailInput = page.locator('#signin-email');
+  22 |         this.passwordInput = page.locator('#signin-password');
+  23 |         this.signInTab = page.getByRole('tab', { name: 'Se connecter' });
+  24 | 
+  25 |         this.signUpTab = page.getByRole('tab', { name: "S'inscrire" });
+  26 |         this.signInButton = page.getByRole('tabpanel', { name: 'Se connecter' })
+  27 |             .getByRole('button', { name: 'Se connecter' });
+  28 |         // Korrigiere den Locator von 'tabpanel' auf 'tab' oder 'button'
+  29 |         //this.signInTab = page.getByRole('tab', { name: 'Se connecter' });     
+  30 |         this.signUpEmailInput = page.locator('#signup-email');
+  31 |         this.signUpPasswordInput = page.locator('#signup-password');
+  32 |         this.signUpButton = page.getByRole('tabpanel', { name: "S'inscrire" })
+  33 |             .getByRole('button', { name: "S'inscrire" });
+  34 |         this.signUpNameInput = page.locator('#signup-name');
+  35 |         this.signUpPhoneInput = page.locator('#signup-phone');
+  36 |         this.createAccountButton = page.getByRole('button', { name: 'Créer un compte' });
+  37 |     }
+  38 |     async goto() {
+  39 |         await this.page.goto('https://autosn.online/auth');
+  40 |     }
+  41 | 
+  42 |     async openSignIn(): Promise<void> {
+  43 |         //await this.connectLink.click();
+  44 |         await this.signInTab.click();
+  45 |     }
+  46 | 
+  47 |     async openSignUp(): Promise<void> {
+  48 |         await this.signUpTab.click();
+  49 |     }
+  50 | 
+  51 |     async signIn(email: string, password: string): Promise<void> {
+  52 |         await this.emailInput.fill(email);
+  53 |         await this.passwordInput.fill(password);
+  54 |         await this.signInButton.click();
+  55 |     }
+  56 | 
+  57 |     async signUp(email: string, password: string, name: string, phone: string): Promise<void> {
+  58 |         await this.signUpTab.click();
+  59 |         await this.signUpEmailInput.fill(email);
+  60 |         await this.signUpPasswordInput.fill(password);
+> 61 |         await this.signUpNameInput.fill(name);
+     |                                    ^ Error: locator.fill: Target page, context or browser has been closed
+  62 |         await this.signUpPhoneInput.fill(phone);
+  63 |         //await this.signUpButton.click();
+  64 |         await this.createAccountButton.click();
+  65 |     }
+  66 | }
+  67 | 
+```
