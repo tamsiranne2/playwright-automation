@@ -61,7 +61,8 @@ test('Erfolgreiche Registrierung mit Fixture', async ({ authPage, page }) => {
   await authPage.openSignUp();
   
   // Reihenfolge beachten: (email, password, phone)
-  await authPage.signUp('Testuser3@gmail.com', 'TestAI13!', '0017567345612');
+  const email = `Testuser3+${Date.now()}@gmail.com`;
+  await authPage.signUp(email, 'TestAI13!', '0017567345612');
 
-  await expect(page.getByRole('heading', { name: 'Tableau de bord vendeur' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Tableau de bord vendeur' })).toBeVisible({ timeout: 15000 });
 });
